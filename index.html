@@ -80,6 +80,7 @@
               <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
               <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
             </div>
+            <div id="errorquantity"></div>
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
             <div class="formData">
               <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" />
@@ -107,6 +108,7 @@
                 <span class="checkbox-icon"></span>
                 Portland</label>
             </div>
+            <div id="errorlocation"></div>
 
             <div class="formData">
               <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
@@ -122,10 +124,14 @@
               </label>
               <br>
             </div>
+            <div id="errorcheck"></div>
             <input class="btn-submit" type="submit" class="button" value="C'est parti" />
           </form>
         </div>
       </div>
+    </div>
+    <div id="backgroundpopup">
+      <div id="popup"></div>
     </div>
   </main>
   <footer>

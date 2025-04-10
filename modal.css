@@ -478,6 +478,20 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+[id^="error"] {
+  color: red;
+  font-size: 17px;
+  padding-top: 5px;
+}
+#backgroundpopup{
+  width: ;
+  height: ;
+}
+#popup{
+  position: fixed
+  width: ;
+  height: ;
+}
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
