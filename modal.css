@@ -480,18 +480,14 @@ footer {
 }
 [id^="error"] {
   color: red;
-  font-size: 17px;
+  font-size: 14px;
   padding-top: 5px;
+  padding-bottom: 15px;
 }
-#backgroundpopup{
-  width: ;
-  height: ;
+.validation p {
+  font-size: 23px;
 }
-#popup{
-  position: fixed
-  width: ;
-  height: ;
-}
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;

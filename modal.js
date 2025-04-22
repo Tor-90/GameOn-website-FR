@@ -12,6 +12,15 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCls = document.querySelectorAll(".close");
+const formulaire = document.getElementById("formulaire");
+const validation = document.getElementById("validation")
+const Prenom = document.getElementById("first");
+const Nom = document.getElementById("last");
+const Email = document.getElementById("email");
+const Anniv = document.getElementById("birthdate");
+const Quantite = document.getElementById("quantity");
+const Locations = document.getElementsByName("location");
+const Conditions = document.getElementById("checkbox1");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -19,6 +28,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  formulaire.style.display = "block";
+  validation.style.display = "none";
+
 }
 
 console.log(modalbg)
@@ -32,106 +44,98 @@ function closeModal() {
 }
 
 
-const Prenom = document.getElementById("first");
-const Nom = document.getElementById("last");
-const Email = document.getElementById("email");
-const Anniv = document.getElementById("birthdate");
-const Quantite = document.getElementById("quantity");
-const Location1 = document.getElementById("location1");
-const Location2 = document.getElementById("location2");
-const Location3 = document.getElementById("location3");
-const Location4 = document.getElementById("location4");
-const Location5 = document.getElementById("location5");
-const Location6 = document.getElementById("location6");
-const Conditions = document.getElementById("checkbox1");
-
 function verifFormulaire() {
-
+  let valide = true
   //verifier le prenom
   const errorFirst = document.getElementById("errorfirst");
   if (Prenom.value.length < 2 || Prenom.value == null) {
-    okFirst = false
     errorFirst.innerText = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.'
-
+    valide = false
   }
 
   else {
-    okFirst = true;
+    errorFirst.innerText = ''
   };
 
 
   //verifier le nom
   const errorLast = document.getElementById("errorlast");
   if (Nom.value.length < 2 || Nom.value == null) {
-    okLast = false
     errorLast.innerText = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.'
-
+    valide = false
   }
 
   else {
-    okLast = true;
+    errorLast.innerText = ''
   };
 
 
   //verifier l'email
   const errorEmail = document.getElementById("erroremail");
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
-  if (emailRegExp.test(Email.value) || Email.value == null) {
-    okEmail = false
+  if (!emailRegExp.test(Email.value)) {
+    valide = false
     errorEmail.innerText = 'Veuillez entrer une adresse email valide'
   }
 
   else {
-    okEmail = true;
+    errorEmail.innerText = ''
   };
 
   //verifier nombre de concours
   const errorQuantity = document.getElementById("errorquantity");
   let quantityRegExp = new RegExp("[0-9]")
-  if (quantityRegExp.test(Quantite.value) || Quantite.value == null) {
-    okQuantite = false
+  if (!quantityRegExp.test(Quantite.value)) {
+    valide = false
     errorQuantity.innerText = 'Veuillez entrer une valeur numérique.'
   }
 
   else {
-    okQuantite = true;
+    errorQuantity.innerText = ''
   };
+  console.log(Anniv.value)
 
   //verifier date de naissance
   const errorBirthdate = document.getElementById("errorbirthdate");
-  if (Anniv.value == null) {
-    okBirthdate = false
+  if (!Anniv.value) {
+    valide = false
     errorBirthdate.innerText = 'Vous devez entrer votre date de naissance.'
   }
 
   else {
-    okBirthdate = true;
+    errorBirthdate.innerText = ''
   };
 
   //verifier Checkbox
   const errorLocation = document.getElementById("errorlocation");
-  if (Location1.checked || Location2.checked || Location3.checked || Location4.checked || Location5.checked || Location6.checked) {
-    okLocation = true
+  let okLocation = false
+  for (let i = 0; i < Locations.length; i++) {
+    if (Locations[i].checked) {
+      okLocation = true
+    }
+  }
+
+  if (okLocation) {
+    errorLocation.innerText = ''
   }
 
   else {
-    okLocation = false
+    valide = false
     errorLocation.innerText = 'Vous devez choisir une option.'
-
   };
 
   //verifier conditions d'utilisation
   const errorCheck = document.getElementById("errorcheck");
   if (Conditions.checked) {
-    okCheck = true
+    errorCheck.innerText = ''
   }
 
   else {
-    okCheck = false
+    valide = false
     errorCheck.innerText = 'Vous devez vérifier que vous acceptez les termes et conditions.'
 
   };
-
+  return valide
 }
 
 
@@ -140,12 +144,10 @@ let form = document.querySelector("form")
 form.addEventListener("submit", (event) => {
   //empeche le formulaire de s'effacer
   event.preventDefault()
-  verifFormulaire()
-  if (okFirst == true && okLast == true && okEmail == true && okQuantite == true && okBirthdate == true && okLocation == true && okCheck == true) {
-    console.log("Validé.")
-    closeModal()
-    popup()
-    
+  if (verifFormulaire()) {
+    console.log("Validé.");
+    formulaire.style.display = "none";
+    validation.style.display = "block";
   }
   else {
     console.log("Erreur.")
