@@ -46,6 +46,7 @@ function closeModal() {
 
 function verifFormulaire() {
   let valide = true
+
   //verifier le prenom
   const errorFirst = document.getElementById("errorfirst");
   if (Prenom.value.length < 2 || Prenom.value == null) {
@@ -57,7 +58,6 @@ function verifFormulaire() {
     errorFirst.innerText = ''
   };
 
-
   //verifier le nom
   const errorLast = document.getElementById("errorlast");
   if (Nom.value.length < 2 || Nom.value == null) {
@@ -68,7 +68,6 @@ function verifFormulaire() {
   else {
     errorLast.innerText = ''
   };
-
 
   //verifier l'email
   const errorEmail = document.getElementById("erroremail");
